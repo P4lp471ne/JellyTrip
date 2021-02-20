@@ -12,7 +12,7 @@ public class Locator implements LocationProvider {
 
     public Locator(Context context) {
         this.client =
-        LocationServices.getFusedLocationProviderClient(context);
+                LocationServices.getFusedLocationProviderClient(context);
     }
 
     @Override
