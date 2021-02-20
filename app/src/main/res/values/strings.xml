@@ -28,4 +28,5 @@
     <string name="option_get_place">Get place</string>
     <string name="pick_place">Choose a place</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyB7t7US8iz5N7crMWiLVG4eE7a4R07aTDA</string>
+
 </resources>
