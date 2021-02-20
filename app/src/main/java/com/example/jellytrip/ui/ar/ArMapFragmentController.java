@@ -36,13 +36,10 @@ public class ArMapFragmentController extends Thread {
     private ModelRenderable lampPostRenderable;
     private ModelRenderable pointer;
     private ArFragment fragment;
-    private List<Anchor> anchors;
-    private ImageView compas;
     private Anchor anchor;
     private Calculator calculator;
 
-    public ArMapFragmentController(ArFragment fragment, ImageView compas, Context applicationContext) {
-        this.compas = compas;
+    public ArMapFragmentController(ArFragment fragment) {
         this.fragment = fragment;
         view = fragment.getArSceneView();
 
@@ -50,7 +47,7 @@ public class ArMapFragmentController extends Thread {
 //        camera = view.getArFrame().getCamera();
 
         makeImages();
-        locationProvider = new Locator(applicationContext);
+        locationProvider = new Locator(fragment.getContext());
     }
 
     @Override
@@ -117,12 +114,12 @@ public class ArMapFragmentController extends Thread {
         return locationProvider.getCarLocation();
     }
 
-    private double getDirection(Coordinates currentLocation, Coordinates currentDot, Coordinates nextDot) {
-        Coordinates v1 = Coordinates.minus(currentDot, currentLocation);
-        Coordinates v2 = Coordinates.minus(nextDot, currentDot);
-        return Math.acos(-(v1.getX()*v2.getX() + v1.getY()*v2.getY())/
-                (Math.sqrt((v1.getX()*v1.getX() + v1.getY()*v1.getY()) * (v2.getX()*v2.getX() + v2.getY()*v2.getY()))));
-    }
+//    private double getDirection(Coordinates currentLocation, Coordinates currentDot, Coordinates nextDot) {
+//        Coordinates v1 = Coordinates.minus(currentDot, currentLocation);
+//        Coordinates v2 = Coordinates.minus(nextDot, currentDot);
+//        return Math.acos(-(v1.getX()*v2.getX() + v1.getY()*v2.getY())/
+//                (Math.sqrt((v1.getX()*v1.getX() + v1.getY()*v1.getY()) * (v2.getX()*v2.getX() + v2.getY()*v2.getY()))));
+//    }
 
 //    private void putPointer(double approach, double dist, double direction) {
 //        Coordinates cc = getCameraFlatCoors();
@@ -143,7 +140,8 @@ public class ArMapFragmentController extends Thread {
 
     private Anchor putObject(double approach, int dist) {
         Coordinates cc = getCameraFlatCoors();
-        Anchor anchor = getAnchor(CoordinatesImpl.plus(cc, new CoordinatesImpl(Math.sin(approach) * dist,
+        anchor.detach();
+        anchor = getAnchor(CoordinatesImpl.plus(cc, new CoordinatesImpl(Math.sin(approach) * dist,
                 Math.cos(approach) * dist)));
         AnchorNode anchorNode = new AnchorNode(anchor);
         anchorNode.setParent(fragment.getArSceneView().getScene());
