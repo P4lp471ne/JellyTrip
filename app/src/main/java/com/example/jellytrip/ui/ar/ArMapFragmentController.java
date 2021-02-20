@@ -172,7 +172,7 @@ public class ArMapFragmentController extends Thread {
         return anchor;
     }
 
-    private double getApproach() {
+    private double getApproach() throws Exception {
         Coordinates currentLocation = locationProvider.getCurrentLocation();
         double azimuth = 0;//TODO
 

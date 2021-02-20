@@ -6,20 +6,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.example.jellytrip.geo.Locator;
-import com.example.jellytrip.geo.RouteProvider;
-import com.example.jellytrip.geo.Router;
+import com.example.jellytrip.geo.Calculator;
 import com.example.jellytrip.geo.types.Coordinates;
 import com.example.jellytrip.geo.types.Route;
 import com.example.jellytrip.tasks.BaseTask;
@@ -32,7 +25,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -358,7 +350,7 @@ class JellyActivity extends AppCompatActivity implements OnMapReadyCallback, iOn
 
         @Override
         public Route call() throws Exception {
-            RouteProvider route = new Router(getString(R.string.google_maps_key));
+            Calculator route = new Router(getString(R.string.google_maps_key));
             Route result = route.paveRoute(from, dest);
             return result;
         }
