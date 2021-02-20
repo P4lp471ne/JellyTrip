@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.jellytrip.R;
+import com.example.jellytrip.geo.Calculator;
 import com.example.jellytrip.geo.Coordinates;
 import com.example.jellytrip.geo.CoordinatesImpl;
 import com.example.jellytrip.geo.LocationProvider;
@@ -37,6 +38,7 @@ public class ArMapFragmentController extends Thread {
     private ArFragment fragment;
     private List<Anchor> anchors;
     private ImageView compas;
+    Calculator calculator;
 
     public ArMapFragmentController(ArFragment fragment, ImageView compas, Context applicationContext) {
         this.compas = compas;
@@ -48,7 +50,8 @@ public class ArMapFragmentController extends Thread {
 
         makeImages();
         FusedLocationProviderClient fusedClient;
-        locationProvider = new Locator();
+        locationProvider = new Locator(applicationContext);
+
     }
 
     @Override
@@ -157,6 +160,7 @@ public class ArMapFragmentController extends Thread {
 //        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 //
 //        return R * c * 1000;
+        return calculator.dist(currentDot, currentDot);
     }
 
     private Anchor putObject(double approach, int dist) {
