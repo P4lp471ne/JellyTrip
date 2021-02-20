@@ -38,7 +38,8 @@ public class ArMapFragmentController extends Thread {
     private ArFragment fragment;
     private List<Anchor> anchors;
     private ImageView compas;
-    Calculator calculator;
+    private Anchor anchor;
+    private Calculator calculator;
 
     public ArMapFragmentController(ArFragment fragment, ImageView compas, Context applicationContext) {
         this.compas = compas;
@@ -49,9 +50,7 @@ public class ArMapFragmentController extends Thread {
 //        camera = view.getArFrame().getCamera();
 
         makeImages();
-        FusedLocationProviderClient fusedClient;
         locationProvider = new Locator(applicationContext);
-
     }
 
     @Override
@@ -115,7 +114,7 @@ public class ArMapFragmentController extends Thread {
 
 
     private Coordinates getDest() {
-        return null;
+        return locationProvider.getCarLocation();
     }
 
     private double getDirection(Coordinates currentLocation, Coordinates currentDot, Coordinates nextDot) {
@@ -138,29 +137,8 @@ public class ArMapFragmentController extends Thread {
 //        lamp.select();
 //    }
 
-    private Anchor getAnchor(Coordinates coordinates, double direction) {
-        Pose pose = new Pose(new float[]{(float) coordinates.getX(), (float) coordinates.getY(), 0},
-                new float[]{90, 90, (float) direction});
-        return session.createAnchor(pose);
-    }
-
     private double dist(Coordinates currentLocation, Coordinates currentDot) {
-//        double lat1 = currentLocation.getX();
-//        double lat2 = currentDot.getX();
-//        double lon1 = currentLocation.getY();
-//        double lon2 = currentDot.getY();
-//
-//        final int R = 6371; // Radius of the earth
-//
-//        double latDistance = Math.toRadians(lat2 - lat1);
-//        double lonDistance = Math.toRadians(lon2 - lon1);
-//        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-//                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-//                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-//        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-//
-//        return R * c * 1000;
-        return calculator.dist(currentDot, currentDot);
+        return calculator.dist(currentLocation, currentDot);
     }
 
     private Anchor putObject(double approach, int dist) {

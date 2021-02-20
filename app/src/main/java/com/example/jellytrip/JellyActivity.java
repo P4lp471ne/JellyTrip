@@ -13,8 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.jellytrip.geo.Calculator;
-import com.example.jellytrip.geo.types.Coordinates;
-import com.example.jellytrip.geo.types.Route;
+import com.example.jellytrip.geo.Coordinates;
 import com.example.jellytrip.tasks.BaseTask;
 import com.example.jellytrip.tasks.TaskRunner;
 import com.example.jellytrip.tasks.iOnDataFetched;
