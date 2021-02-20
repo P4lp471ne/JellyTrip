@@ -24,6 +24,7 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -134,7 +135,7 @@ public class ArMapFragmentController extends Thread {
 //        lamp.select();
 //    }
 
-    private double dist(Coordinates currentLocation, Coordinates currentDot) {
+    private double dist(Coordinates currentLocation, Coordinates currentDot) throws IOException {
         return calculator.dist(currentLocation, currentDot);
     }
 
@@ -154,7 +155,7 @@ public class ArMapFragmentController extends Thread {
 
     private double getApproach() throws Exception {
         Coordinates currentLocation = locationProvider.getCurrentLocation();
-        double azimuth = 0;//TODO
+        double azimuth = locationProvider.getAzimuth();
 
         Coordinates approachvect = Coordinates.minus(getDest(), currentLocation);
         return Math.atan(approachvect.getY() / approachvect.getX()) - azimuth + camera.getPose().qz();

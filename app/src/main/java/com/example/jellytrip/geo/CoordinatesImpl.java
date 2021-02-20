@@ -25,11 +25,17 @@ public class CoordinatesImpl implements Coordinates {
 
     @Override
     public Coordinates minus(Coordinates coordinates) {
-        return null;
+        double newX = x - coordinates.getX();
+        double newY = y  -coordinates.getY();
+
+        return new CoordinatesImpl(newX, newY);
     }
 
     @Override
     public Coordinates plus(Coordinates coordinates) {
-        return null;
+        double newX = x + coordinates.getX();
+        double newY = y  + coordinates.getY();
+
+        return new CoordinatesImpl(newX, newY);
     }
 }

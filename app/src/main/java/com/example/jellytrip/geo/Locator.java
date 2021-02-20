@@ -25,4 +25,14 @@ public class Locator implements LocationProvider {
         return null;
     }
 
+    @Override
+    public Coordinates getCarLocation() {
+        return null;
+    }
+
+    @Override
+    public double getAzimuth() {
+        return 0;
+    }
+
 }
