@@ -117,6 +117,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
+                // TODO add reaction
                 Log.i(TAG, "Place : "+place.getName()+ " Coors "+place.getLatLng() );
 
                 setRoute(place.getLatLng());
