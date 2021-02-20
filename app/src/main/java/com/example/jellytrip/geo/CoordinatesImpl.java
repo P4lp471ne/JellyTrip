@@ -1,5 +1,7 @@
 package com.example.jellytrip.geo;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class CoordinatesImpl implements Coordinates {
     private double x;
     private double y;
@@ -7,6 +9,11 @@ public class CoordinatesImpl implements Coordinates {
     public CoordinatesImpl(double x, double y){
         this.x = x;
         this.y = y;
+    }
+
+    public CoordinatesImpl(LatLng latLng) {
+        this.x = latLng.longitude;
+        this.y = latLng.latitude;
     }
 
     public static Coordinates plus(Coordinates cc, CoordinatesImpl coordinates) {
@@ -38,4 +45,8 @@ public class CoordinatesImpl implements Coordinates {
 
         return new CoordinatesImpl(newX, newY);
     }
+    public LatLng toLatLng() {
+        return new LatLng(y, x);
+    }
+
 }

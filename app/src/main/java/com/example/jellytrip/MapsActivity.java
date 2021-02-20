@@ -1,20 +1,23 @@
 package com.example.jellytrip;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.example.jellytrip.geo.Calculator;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.jellytrip.geo.Coordinates;
 import com.example.jellytrip.geo.CoordinatesImpl;
+import com.example.jellytrip.geo.RouteProvider;
 import com.example.jellytrip.geo.Router;
 import com.example.jellytrip.geo.types.Route;
 import com.example.jellytrip.tasks.BaseTask;
@@ -31,7 +34,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,9 +47,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
-class JellyActivity extends AppCompatActivity implements OnMapReadyCallback, iOnDataFetched {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, iOnDataFetched {
 
-    private static final String TAG = JellyActivity.class.getSimpleName();
+    private static final String TAG = com.example.jellytrip.MapsActivity.class.getSimpleName();
     private GoogleMap map;
     private CameraPosition cameraPosition;
 
@@ -89,7 +91,7 @@ class JellyActivity extends AppCompatActivity implements OnMapReadyCallback, iOn
         }
 
         // Retrieve the content view that renders the map.
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_maps);
 
 
         // Construct a PlacesClient
@@ -124,19 +126,19 @@ class JellyActivity extends AppCompatActivity implements OnMapReadyCallback, iOn
             @Override
             public void onError(@NonNull Status status) {
                 // Todo add error handling
-                Log.e(TAG, "Error : "+ status);
+                    Log.e(TAG, "Error : "+ status);
             }
         });
 
     }
 
-   // @Override
- //   public boolean onCreateOptionsMenu(Menu menu) {
-  //      getMenuInflater().inflate(R.menu.menu_main, menu);
- //       return true;
- //   }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
- /*   @Override
+    @Override
     public boolean onOptionsItemSelected( MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.action_exit){
@@ -149,7 +151,7 @@ class JellyActivity extends AppCompatActivity implements OnMapReadyCallback, iOn
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -172,7 +174,7 @@ class JellyActivity extends AppCompatActivity implements OnMapReadyCallback, iOn
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
-        final JellyActivity normalActivity = this;
+        final com.example.jellytrip.MapsActivity normalActivity = this;
 
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -339,6 +341,7 @@ class JellyActivity extends AppCompatActivity implements OnMapReadyCallback, iOn
 
     }
 
+
     private class RouteTask extends BaseTask {
         private final iOnDataFetched listener;
         private final Coordinates from;
@@ -352,7 +355,7 @@ class JellyActivity extends AppCompatActivity implements OnMapReadyCallback, iOn
 
         @Override
         public Route call() throws Exception {
-            Router route = new Router(getString(R.string.google_maps_key));
+            RouteProvider route = new Router(getString(R.string.google_maps_key));
             Route result = route.paveRoute(from, dest);
             return result;
         }
@@ -369,4 +372,6 @@ class JellyActivity extends AppCompatActivity implements OnMapReadyCallback, iOn
             listener.hideProgressBar();
         }
     }
+
+
 }
