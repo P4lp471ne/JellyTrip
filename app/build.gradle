@@ -46,4 +46,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.1'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.1'
+    implementation 'com.google.android.libraries.places:places:2.0.0'
 }

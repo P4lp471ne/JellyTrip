@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MapsFragment">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/autocomplete_fragment"
         android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
