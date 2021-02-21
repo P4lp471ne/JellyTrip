@@ -53,7 +53,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, iOnDat
     private CameraPosition cameraPosition;
 
     // The entry point to the Places API.
-    private PlacesClient placesClient;
+
 
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -95,7 +95,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, iOnDat
 
         // Construct a PlacesClient
         Places.initialize(getActivity().getApplicationContext(), getString(R.string.google_maps_key));
-        placesClient = Places.createClient(this.getActivity());
+//        placesClient = Places.createClient(this.getActivity());
 
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.getActivity());
